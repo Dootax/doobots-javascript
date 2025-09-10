@@ -6,6 +6,22 @@
   "bin": {
     "doobots-run": "./dist/doobots-runner.js"
   },
+  "files": [
+    "dist"
+  ],
+  "author": {
+    "name": "Dootax",
+    "email": "equipetecnologia@dootax.com.br",
+    "url": "https://github.com/dootax"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dootax/doobots-javascript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dootax/doobots-javascript/issues"
+  },
+  "homepage": "https://github.com/dootax/doobots-javascript",
   "type": "module",
   "scripts": {
     "build": "tsc",
@@ -21,6 +37,5 @@
     "typescript": "^5.0.0"
   },
   "description": "Helpers do DooBots para execução de código do usuário",
-  "author": "Dootax",
   "license": "MIT"
 }

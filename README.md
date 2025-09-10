@@ -8,5 +8,3 @@ Aqui ficam as classes helpers para facilitar o desenvolvimento de scripts JavaSc
 npm install
 npm test
 ```
-
-> Projeto está em WIP. Quando liberarmos a versão 1.0, publicaremos no NPMJS.
