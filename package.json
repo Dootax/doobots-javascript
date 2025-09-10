@@ -1,0 +1,26 @@
+{
+  "name": "doobots",
+  "version": "0.1.0",
+  "main": "dist/doobots.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "doobots-run": "./dist/doobots-runner.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
+    "start": "node dist/doobots-runner.js"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^24.3.1",
+    "cross-env": "^10.0.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.0.0"
+  },
+  "description": "Helpers do DooBots para execução de código do usuário",
+  "author": "Dootax",
+  "license": "MIT"
+}
