@@ -1,10 +1,11 @@
 {
   "name": "doobots",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/doobots.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "doobots-run": "./dist/doobots-runner.js"
+    "doobots-run": "./dist/doobots-runner.js",
+    "doobots-package": "./dist/doobots-packager.js"
   },
   "files": [
     "dist"
@@ -29,6 +30,7 @@
     "start": "node dist/doobots-runner.js"
   },
   "devDependencies": {
+    "@types/archiver": "^6.0.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.3.1",
     "cross-env": "^10.0.0",
@@ -41,5 +43,8 @@
     "glob": "^11.0.3"
   },
   "description": "Helpers do DooBots para execução de código do usuário",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "archiver": "^7.0.1"
+  }
 }
