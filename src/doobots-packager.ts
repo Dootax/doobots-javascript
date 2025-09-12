@@ -14,12 +14,13 @@ async function copySrcToDist(srcDir: string, distDir: string) {
 async function main() {
   const cwd = process.cwd();
   const packageJson = path.join(cwd, "package.json");
+  const packageLockJson = path.join(cwd, "package-lock.json");
   const distDir = path.join(cwd, "dist");
   const srcDir = path.join(cwd, "src");
   const tsConfigPath = path.join(cwd, "tsconfig.json");
 
-  if (!fs.existsSync(packageJson)) {
-    console.error("❌ Não encontrei package.json na raiz do projeto.");
+  if (!fs.existsSync(packageJson) || !fs.statSync(packageJson).isFile()) {
+    console.error("❌ Não encontrei os arquivos package.json e package-lock.json na raiz do projeto.");
     process.exit(1);
   }
 
@@ -40,6 +41,8 @@ async function main() {
   }
 
   fs.copyFileSync(packageJson, path.join(distDir, "package.json"));
+  fs.copyFileSync(packageLockJson, path.join(distDir, "package-lock.json"));
+  console.log("✅ Copiados package.json e package-lock.json para 'dist'.");
 
   if (!isTypeScriptProject && fs.existsSync(srcDir)) {
     console.log("📂 Projeto JavaScript detectado. Copiando conteúdo de 'src' para 'dist'...");

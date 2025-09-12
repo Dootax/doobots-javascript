@@ -1,6 +1,6 @@
 {
   "name": "doobots",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/doobots.js",
   "types": "dist/index.d.ts",
   "bin": {
