@@ -1,6 +1,6 @@
 {
   "name": "doobots",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "dist/doobots.js",
   "types": "dist/index.d.ts",
   "bin": {
@@ -45,6 +45,7 @@
   "description": "Helpers do DooBots para execução de código do usuário",
   "license": "MIT",
   "dependencies": {
-    "archiver": "^7.0.1"
+    "archiver": "^7.0.1",
+    "minimatch": "^10.2.4"
   }
 }
