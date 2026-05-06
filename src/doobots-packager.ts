@@ -2,7 +2,7 @@
 
 import fs from "fs";
 import path from "path";
-import archiver from "archiver";
+import yazl from "yazl";
 
 async function copySrcToDist(srcDir: string, distDir: string) {
   await fs.promises.cp(srcDir, distDir, {
@@ -53,22 +53,45 @@ async function main() {
   const zipName = `${pkg.name || "package"}-${pkg.version}.zip`;
   const zipPath = path.join(cwd, zipName);
 
-  const output = fs.createWriteStream(zipPath);
-  const archive = archiver("zip", { zlib: { level: 9 } });
+  try {
+    await zipDirectory(distDir, zipPath);
 
-  output.on("close", () => {
-    console.log(`✅ Pacote gerado: ${zipPath} (${archive.pointer()} bytes)`);
-  });
-
-  archive.on("error", (err) => {
+    const size = fs.statSync(zipPath).size;
+    console.log(`✅ Pacote gerado: ${zipPath} (${size} bytes)`);
+  } catch (err) {
     console.error("Erro ao criar o pacote:", err);
     process.exit(1);
+  }
+}
+
+function zipDirectory(sourceDir: string, outPath: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const zipfile = new yazl.ZipFile();
+
+    function addDir(dir: string, basePath = "") {
+      const files = fs.readdirSync(dir);
+
+      for (const file of files) {
+        const fullPath = path.join(dir, file);
+        const relativePath = path.join(basePath, file);
+
+        if (fs.statSync(fullPath).isDirectory()) {
+          addDir(fullPath, relativePath);
+        } else {
+          zipfile.addFile(fullPath, relativePath);
+        }
+      }
+    }
+
+    addDir(sourceDir);
+
+    zipfile.end();
+
+    zipfile.outputStream
+      .pipe(fs.createWriteStream(outPath))
+      .on("close", resolve)
+      .on("error", reject);
   });
-
-  archive.pipe(output);
-  archive.directory(distDir, false);
-
-  await archive.finalize();
 }
 
 main();
